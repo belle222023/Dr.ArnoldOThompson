@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Dr. Arnold O. Thompson</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --dark: #0D1F0F;
+    --deep: #0F1A10;
+    --mid: #1A2E1C;
+    --text: #E8E0D0;
+    --muted: #8A9080;
+    --cream: #F5EDD8;
+    --red: #B22222;
+    --red-light: #D94040;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Cormorant Garamond',serif; background:var(--dark); color:var(--text); overflow-x:hidden; }
+
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    background:rgba(13,13,13,0.95); backdrop-filter:blur(12px);
+    border-bottom:2px solid rgba(178,34,34,0.5);
+    padding:0 4vw; display:flex; align-items:center; justify-content:space-between; height:68px;
+  }
+  .nav-brand { font-family:'Bebas Neue',sans-serif; font-size:1.15rem; letter-spacing:0.18em; color:var(--gold); text-decoration:none; }
+  .nav-links { display:flex; gap:2.5rem; list-style:none; }
+  .nav-links a {
+    text-decoration:none; color:var(--muted); font-size:0.78rem;
+    letter-spacing:0.18em; text-transform:uppercase;
+    font-family:'Cormorant Garamond',serif; font-weight:400; transition:color 0.25s;
+  }
+  .nav-links a:hover, .nav-links a.active { color:var(--gold); }
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
+  .hamburger span { width:24px; height:2px; background:var(--gold); display:block; }
+
+  .section-header { text-align:center; margin-bottom:3.5rem; }
+  .section-eyebrow {
+    font-family:'Bebas Neue',sans-serif; letter-spacing:0.3em; font-size:0.7rem;
+    color:var(--gold); margin-bottom:1rem;
+    display:flex; align-items:center; justify-content:center; gap:1rem;
+  }
+  .section-eyebrow::before,.section-eyebrow::after { content:''; display:block; width:30px; height:1px; background:rgba(178,34,34,0.5); }
+  .section-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:700; color:var(--cream); line-height:1.2; }
+  .section-title em { color:var(--gold); font-style:italic; }
+
+  .gold-divider { display:flex; align-items:center; gap:1.5rem; margin:3rem 0; }
+  .gold-divider::before,.gold-divider::after { content:''; flex:1; height:1px; background:rgba(178,34,34,0.2); }
+  .gold-divider span { color:var(--gold); font-size:1.2rem; }
+
+  footer {
+    background:#080E09; border-top:1px solid rgba(178,34,34,0.25);
+    padding:3rem 4vw; text-align:center;
+  }
+  .footer-brand { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--gold); margin-bottom:0.5rem; }
+  footer p { font-size:0.8rem; color:var(--muted); }
+  .footer-links { display:flex; justify-content:center; gap:2rem; list-style:none; margin:1.5rem 0; flex-wrap:wrap; }
+  .footer-links a { color:var(--muted); text-decoration:none; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; transition:color 0.25s; }
+  .footer-links a:hover { color:var(--gold); }
+
+  @media(max-width:768px){
+    .nav-links{display:none;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(13,13,13,0.97);padding:1.5rem;gap:1rem;}
+    .nav-links.open{display:flex;}
+    .hamburger{display:flex;}
+  }
+
+  /* ── Gallery Layout ── */
+  .gallery-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 8rem 4vw 6rem;
+  }
+
+  /* Three equal columns */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+
+  /* Fixed aspect ratio — every cell is exactly the same height */
+  .gallery-item .img-wrap {
+    width: 100%;
+    aspect-ratio: 3 / 4;   /* portrait — adjust to 4/3 for landscape if preferred */
+    overflow: hidden;
+    display: block;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: contrast(1.05) brightness(0.85) saturate(0.9);
+    transition: filter 0.4s, transform 0.6s;
+  }
+
+  .gallery-item:hover img {
+    filter: contrast(1.1) brightness(1) saturate(1);
+    transform: scale(1.04);
+  }
+
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  .gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    padding: 1.2rem 1.2rem;
+    font-style: italic;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--cream);
+  }
+
+  .gallery-note {
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* Mobile: single column */
+  @media(max-width: 680px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-item .img-wrap { aspect-ratio: 4 / 3; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">DR. ARNOLD O. THOMPSON</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="books.html">Books</a></li>
+    <li><a href="gallery.html" class="active">Gallery</a></li>
+    <li><a href="mission.html">Mission</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<main>
+  <div class="gallery-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">Images</div>
+      <h2 class="section-title">The Author in <em>His World</em></h2>
+    </div>
+
+    <div class="gallery-grid">
+
+      <!-- Photo 1 -->
+      <div class="gallery-item">
+        <div class="img-wrap">
+          <img src="g3.jpg" alt="Certificate of Recognition — New York">
+        </div>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-caption">Certificate of Recognition — Organizations of Literary Agents and Editors, New York</div>
+      </div>
+
+      <!-- Photo 2 -->
+      <div class="gallery-item">
+        <div class="img-wrap">
+          <img src="g2.jpg" alt="Dr. Thompson at his writing desk">
+        </div>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-caption">Dr. Thompson at his writing desk</div>
+      </div>
+
+      <!-- Photo 3 -->
+      <div class="gallery-item">
+        <div class="img-wrap">
+          <img src="g1.jpg" alt="Editorial Pitch Session, New York">
+        </div>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-caption">Holding his Certificate of Recognition — distinguished participation at the Editorial Pitch Session, New York</div>
+      </div>
+
+    </div><!-- /gallery-grid -->
+
+    <div class="gold-divider" style="margin-top:3rem"><span>✦</span></div>
+    <p class="gallery-note">Dr. Thompson trained at the New York Institute of Professional Photography and worked as a fashion and celebrity photographer in South Beach, Florida. His photography and graphic work appear throughout all of his books.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-brand">Dr. Arnold O. Thompson</div>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="books.html">Books</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="mission.html">Mission</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <p>© 2025 Dr. Arnold O. Thompson · All rights reserved.</p>
+</footer>
+
+</body>
+</html>

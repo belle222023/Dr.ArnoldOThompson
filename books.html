@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Books — Dr. Arnold O. Thompson</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --dark: #0D1F0F;
+    --deep: #0F1A10;
+    --mid: #1A2E1C;
+    --text: #E8E0D0;
+    --muted: #8A9080;
+    --cream: #F5EDD8;
+    --red: #B22222;
+    --red-light: #D94040;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Cormorant Garamond',serif; background:var(--dark); color:var(--text); overflow-x:hidden; }
+
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    background:rgba(13,13,13,0.95); backdrop-filter:blur(12px);
+    border-bottom:2px solid rgba(178,34,34,0.5);
+    padding:0 4vw; display:flex; align-items:center; justify-content:space-between; height:68px;
+  }
+  .nav-brand { font-family:'Bebas Neue',sans-serif; font-size:1.15rem; letter-spacing:0.18em; color:var(--gold); text-decoration:none; }
+  .nav-links { display:flex; gap:2.5rem; list-style:none; }
+  .nav-links a {
+    text-decoration:none; color:var(--muted); font-size:0.78rem;
+    letter-spacing:0.18em; text-transform:uppercase;
+    font-family:'Cormorant Garamond',serif; font-weight:400; transition:color 0.25s;
+  }
+  .nav-links a:hover, .nav-links a.active { color:var(--gold); }
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
+  .hamburger span { width:24px; height:2px; background:var(--gold); display:block; }
+
+  .section-header { text-align:center; margin-bottom:4rem; }
+  .section-eyebrow {
+    font-family:'Bebas Neue',sans-serif; letter-spacing:0.3em; font-size:0.7rem;
+    color:var(--gold); margin-bottom:1rem;
+    display:flex; align-items:center; justify-content:center; gap:1rem;
+  }
+  .section-eyebrow::before,.section-eyebrow::after { content:''; display:block; width:30px; height:1px; background:rgba(178,34,34,0.5); }
+  .section-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:700; color:var(--cream); line-height:1.2; }
+  .section-title em { color:var(--gold); font-style:italic; }
+  .btn-primary {
+    background:var(--gold); color:var(--dark); padding:0.85rem 2.2rem;
+    font-family:'Cormorant Garamond',serif; font-size:0.9rem; font-weight:600;
+    letter-spacing:0.12em; text-transform:uppercase; border:none; cursor:pointer;
+    transition:background 0.25s,transform 0.2s; text-decoration:none; display:inline-block;
+  }
+  .btn-primary:hover { background:var(--gold-light); transform:translateY(-2px); }
+
+  footer {
+    background:#080E09; border-top:1px solid rgba(178,34,34,0.25);
+    padding:3rem 4vw; text-align:center;
+  }
+  .footer-brand { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--gold); margin-bottom:0.5rem; }
+  footer p { font-size:0.8rem; color:var(--muted); }
+  .footer-links { display:flex; justify-content:center; gap:2rem; list-style:none; margin:1.5rem 0; flex-wrap:wrap; }
+  .footer-links a { color:var(--muted); text-decoration:none; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; transition:color 0.25s; }
+  .footer-links a:hover { color:var(--gold); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+  @media(max-width:768px){
+    .nav-links{display:none;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(13,13,13,0.97);padding:1.5rem;gap:1rem;}
+    .nav-links.open{display:flex;}
+    .hamburger{display:flex;}
+  }
+</style>
+
+<style>
+  .books-inner { max-width:1200px; margin:0 auto; padding:8rem 4vw 6rem; }
+  .featured-book { display:grid; grid-template-columns:auto 1fr; gap:4rem; align-items:center; background:var(--mid); border:1px solid rgba(178,34,34,0.25); padding:3rem; margin-bottom:4rem; position:relative; overflow:hidden; }
+  .featured-book::before { content:'FEATURED'; position:absolute; top:1.5rem; right:-2.5rem; background:var(--red); color:#fff; font-family:'Bebas Neue',sans-serif; letter-spacing:0.2em; font-size:0.7rem; padding:0.4rem 3rem; transform:rotate(45deg); }
+  .featured-book-cover { width:200px; box-shadow:0 20px 60px rgba(0,0,0,0.6); transition:transform 0.4s; }
+  .featured-book-cover:hover { transform:scale(1.03) rotate(-1deg); }
+  .featured-book-info h3 { font-family:'Playfair Display',serif; font-size:1.8rem; color:var(--cream); line-height:1.2; margin-bottom:0.5rem; }
+  .featured-book-info .subtitle { font-style:italic; color:var(--gold); font-size:1rem; margin-bottom:1.5rem; }
+  .featured-book-info p { font-size:1rem; line-height:1.8; color:#9A9080; margin-bottom:1rem; }
+  .books-list { display:flex; flex-direction:column; gap:2rem; }
+  .book-item { display:grid; grid-template-columns:8px 1fr; gap:1.5rem; padding:2rem; background:var(--mid); border:1px solid rgba(255,255,255,0.05); transition:border-color 0.3s,transform 0.3s; }
+  .book-item:hover { border-color:rgba(178,34,34,0.5); transform:translateX(4px); }
+  .book-item-accent { background:var(--red); }
+  .book-item-content h4 { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--cream); margin-bottom:0.4rem; line-height:1.3; }
+  .book-item-content .book-sub { font-style:italic; color:var(--gold); font-size:0.88rem; margin-bottom:0.8rem; }
+  .book-item-content p { font-size:0.93rem; line-height:1.75; color:#7A7268; }
+  .book-badge { display:inline-block; background:rgba(201,168,76,0.12); border:1px solid rgba(178,34,34,0.4); color:var(--gold); font-family:'Bebas Neue',sans-serif; letter-spacing:0.15em; font-size:0.65rem; padding:0.25rem 0.7rem; margin-top:0.7rem; margin-right:0.4rem; }
+  .btn-amazon {
+    display:inline-flex; align-items:center; gap:0.6rem;
+    background:var(--gold); color:var(--dark); padding:0.85rem 2.2rem;
+    font-family:'Cormorant Garamond',serif; font-size:0.9rem; font-weight:600;
+    letter-spacing:0.12em; text-transform:uppercase; border:none; cursor:pointer;
+    transition:background 0.25s,transform 0.2s; text-decoration:none;
+    margin-top:1.5rem;
+  }
+  .btn-amazon:hover { background:var(--gold-light); transform:translateY(-2px); }
+  @media(max-width:768px){ .featured-book{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">DR. ARNOLD O. THOMPSON</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="books.html" class="active">Books</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="mission.html">Mission</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<main>
+  <div class="books-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">Published Works</div>
+      <h2 class="section-title">Nine Books.<br><em>One Relentless Mission.</em></h2>
+    </div>
+
+    <!-- FEATURED BOOK -->
+    <div class="featured-book">
+      <img class="featured-book-cover" src="Book.png" alt="The Death of Wisdom, The Rise of Folly">
+      <div class="featured-book-info">
+        <h3>The Death of Wisdom,<br>the Rise of Folly</h3>
+        <div class="subtitle">Why We Must Care</div>
+        <p>Dr. Thompson saw America with the image of children playing a seesaw — a single plank, kept going by the pivot in the middle and players on each side pushing up so the player on the other side would be pushed down. He saw America and the world, at every level, like that seesaw game, with Folly on one side and Wisdom on the other. Everywhere he looked, Folly was rising to the top while Wisdom struggled to find her legs and get up. He wanted to give Wisdom a leg up.</p>
+        <p>In the book, Wisdom is personified as a lady. He wanted her to rise up against the dark forces in America and the world keeping her down. She is described as an abused lady — and we need to come to her aid. Written about six years ago as a prophetic call, today Wisdom appears to be on life support in the back of the train. Dr. Thompson was inspired to write this book to give Wisdom a fighting chance to survive. This is the most urgent call in our times to care before she dies on our watch.</p>
+        <p style="font-style:italic;color:var(--gold);font-size:0.9rem">"Wisdom is riding on a passenger train of time on a collision course with destiny, and we are all in for the ride."</p>
+        <span class="book-badge">AVAILABLE NOW</span>
+        <span class="book-badge">FEATURED WORK</span>
+        <div>
+          <a href="https://www.amazon.sg/Death-Wisdom-Rise-Folly-Must/dp/1638742502" target="_blank" rel="noopener noreferrer" class="btn-amazon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M15.23 15.998c-1.03.86-2.52 1.312-3.805 1.312-1.802 0-3.422-.667-4.65-1.775-.096-.087-.01-.206.106-.138 1.323.77 2.958 1.232 4.647 1.232 1.14 0 2.394-.236 3.547-.727.174-.074.32.114.155.096zm.44-.5c-.132-.169-.873-.08-1.207-.04-.1.012-.116-.076-.026-.14.591-.416 1.561-.296 1.674-.157.113.14-.03 1.112-.584 1.576-.085.072-.166.033-.128-.058.124-.313.4-1.012.271-1.181zM12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-1.29 14.424c-2.932-.793-4.977-3.04-4.977-5.924 0-2.04.96-3.853 2.457-5.056.18-.143.36.018.27.217-.483 1.075-.75 2.263-.75 3.505 0 2.97 1.754 5.51 4.34 6.704.158.073.093.636-.34.554zm2.867-.094c-.39.072-.758-.03-.884-.214-.125-.183-.006-.386.326-.448.375-.07.693.003.84.2.15.198.11.39-.282.462z"/></svg>
+            Buy on Amazon
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOKS LIST -->
+    <div class="books-list">
+
+      <div class="book-item">
+        <div class="book-item-accent"></div>
+        <div class="book-item-content">
+          <h4>The Dark Side of the Gospel</h4>
+          <div class="book-sub">Looking at the Darkness to See the Light</div>
+          <p>A book about the reality that bad things happen to good people. It explores why — and how we can find solace and salvation in suffering, just as Jesus did.</p>
+        </div>
+      </div>
+
+      <div class="book-item">
+        <div class="book-item-accent"></div>
+        <div class="book-item-content">
+          <h4>Deliver Us from Evil</h4>
+          <div class="book-sub">A Prayer for Our Times</div>
+          <p>Follows the theme of the first book. A deep dive into the spiritual backstage of life, explaining how forces beyond what we see influence what we do. It lays out the biblical spiritual battle plan to contend with the fierce enemy of evil — an evil so dark and fierce that God Himself asked all His followers to pray to be delivered from it even in this life.</p>
+        </div>
+      </div>
+
+      <div class="book-item">
+        <div class="book-item-accent"></div>
+        <div class="book-item-content">
+          <h4>The Evangelical Church at the Crossroads of Secular Culture and Change</h4>
+          <div class="book-sub">Facing the Tough Issues of Myth and Mission</div>
+          <p>A manifesto to the Evangelical Church, addressing the often-destructive ways it has engaged with secular culture in its proclamation of the Gospel. The book outlines major fault lines, identifies myths, distinguishes the Church's biblical mandate, and clarifies its methods consistent with the New Testament church form and freedom Christ left His Church to follow.</p>
+        </div>
+      </div>
+
+      <div class="book-item">
+        <div class="book-item-accent"></div>
+        <div class="book-item-content">
+          <h4>Why Do Birds Fly</h4>
+          <div class="book-sub">How to Fly High in a World Trying to Keep You Down</div>
+          <p>Taking a much lighter tone from the heavy issues of the day, this book is geared to a younger teenage audience. Once focused in the celebrity world of photography, Dr. Thompson turned here to his love of photographing nature — particularly birds — and what wisdom we can gain from their beauty and behavior. His message to youths: fly high in a world often trying to keep you down.</p>
+          <span class="book-badge">YOUNG ADULT</span>
+        </div>
+      </div>
+
+      <div class="book-item">
+        <div class="book-item-accent"></div>
+        <div class="book-item-content">
+          <h4>Spaces of Existence — Three-Volume Work</h4>
+          <div class="book-sub">Inside-out, Outside-in · Me Against the World · We Against the World</div>
+          <p>Based on a graphic model created by the author to illustrate and explain the comprehensive spaces of the universe in which we all live. The volumes explore the major questions of existence based on his theories, arguing that such theories should not be left solely to biologists, physicists, or AI, which consider only a limited dimension of human existence. Built over some twenty years of research, the works address the central questions: Who Are We, Who Are We Becoming, Who Do We Want to Be? — especially critical in an age of the rise of the machines and the massive influence of artificial intelligence. The folly of our generation, Dr. Thompson argues, would be to leave the definition of who we are to those who never made us: beings who are "a little lower than angels, fearfully and wonderfully made." Still human after all these years.</p>
+          <span class="book-badge">THREE VOLUMES</span>
+          <span class="book-badge">FORTHCOMING</span>
+        </div>
+      </div>
+
+      <div class="book-item">
+        <div class="book-item-accent"></div>
+        <div class="book-item-content">
+          <h4>A Communication Model of Christian Witness</h4>
+          <div class="book-sub">How to Share the Gospel With Anyone — A Book 50 Years in the Making</div>
+          <p>Based on the original communication model Dr. Thompson developed in the late 1970s during his studies — the very manuscript that started his writing journey and was nearly published by Moody Press.</p>
+          <span class="book-badge">FORTHCOMING</span>
+          <span class="book-badge">50 YEARS IN THE MAKING</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-brand">Dr. Arnold O. Thompson</div>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="books.html">Books</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="mission.html">Mission</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <p>© 2025 Dr. Arnold O. Thompson · All rights reserved.</p>
+</footer>
+
+</body>
+</html>

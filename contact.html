@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Dr. Arnold O. Thompson</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --dark: #0D1F0F;
+    --deep: #0F1A10;
+    --mid: #1A2E1C;
+    --text: #E8E0D0;
+    --muted: #8A9080;
+    --cream: #F5EDD8;
+    --red: #B22222;
+    --red-light: #D94040;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Cormorant Garamond',serif; background:var(--dark); color:var(--text); overflow-x:hidden; }
+
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    background:rgba(13,13,13,0.95); backdrop-filter:blur(12px);
+    border-bottom:2px solid rgba(178,34,34,0.5);
+    padding:0 4vw; display:flex; align-items:center; justify-content:space-between; height:68px;
+  }
+  .nav-brand { font-family:'Bebas Neue',sans-serif; font-size:1.15rem; letter-spacing:0.18em; color:var(--gold); text-decoration:none; }
+  .nav-links { display:flex; gap:2.5rem; list-style:none; }
+  .nav-links a {
+    text-decoration:none; color:var(--muted); font-size:0.78rem;
+    letter-spacing:0.18em; text-transform:uppercase;
+    font-family:'Cormorant Garamond',serif; font-weight:400; transition:color 0.25s;
+  }
+  .nav-links a:hover, .nav-links a.active { color:var(--gold); }
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
+  .hamburger span { width:24px; height:2px; background:var(--gold); display:block; }
+
+  .section-header { text-align:center; margin-bottom:3rem; }
+  .section-eyebrow {
+    font-family:'Bebas Neue',sans-serif; letter-spacing:0.3em; font-size:0.7rem;
+    color:var(--gold); margin-bottom:1rem;
+    display:flex; align-items:center; justify-content:center; gap:1rem;
+  }
+  .section-eyebrow::before,.section-eyebrow::after { content:''; display:block; width:30px; height:1px; background:rgba(178,34,34,0.5); }
+  .section-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:700; color:var(--cream); line-height:1.2; }
+  .section-title em { color:var(--gold); font-style:italic; }
+
+  footer {
+    background:#080E09; border-top:1px solid rgba(178,34,34,0.25);
+    padding:3rem 4vw; text-align:center;
+  }
+  .footer-brand { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--gold); margin-bottom:0.5rem; }
+  footer p { font-size:0.8rem; color:var(--muted); }
+  .footer-links { display:flex; justify-content:center; gap:2rem; list-style:none; margin:1.5rem 0; flex-wrap:wrap; }
+  .footer-links a { color:var(--muted); text-decoration:none; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; transition:color 0.25s; }
+  .footer-links a:hover { color:var(--gold); }
+
+  @media(max-width:768px){
+    .nav-links{display:none;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(13,13,13,0.97);padding:1.5rem;gap:1rem;}
+    .nav-links.open{display:flex;}
+    .hamburger{display:flex;}
+  }
+
+  /* ── Contact Layout ── */
+  .contact-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 8rem 4vw 6rem;
+  }
+
+  .contact-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  /* ── Cards ── */
+  .contact-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    opacity: 0;
+    animation: slideInLeft 0.8s ease 0.3s forwards;
+  }
+
+  .contact-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem 0.6rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    transition: background 0.3s;
+  }
+  .contact-card:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
+  .contact-card:hover { background: rgba(178,34,34,0.06); }
+
+  .contact-icon {
+    width: 42px; height: 42px; flex-shrink: 0;
+    border: 1px solid rgba(178,34,34,0.45);
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 0.1rem;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .contact-card:hover .contact-icon {
+    border-color: var(--red);
+    background: rgba(201,168,76,0.08);
+  }
+  .contact-icon svg {
+    width: 17px; height: 17px;
+    stroke: var(--gold); fill: none;
+    stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .contact-text .label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.65rem; letter-spacing: 0.25em;
+    color: var(--gold); margin-bottom: 0.35rem;
+  }
+  .contact-text p,
+  .contact-text a {
+    font-size: 1rem; color: var(--text);
+    line-height: 1.65; text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-text a:hover { color: var(--gold-light); }
+
+  /* ── Quote Panel ── */
+  .quote-panel {
+    background: linear-gradient(150deg, #0a1f0c 0%, #081508 60%, #061206 100%);
+    border: 1px solid rgba(178,34,34,0.35);
+    padding: 2.8rem 2.4rem;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: slideInRight 0.8s ease 0.5s forwards;
+  }
+
+  /* Decorative shimmer line */
+  .quote-panel::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.06), transparent);
+    animation: shimmer 4s ease-in-out 1.5s infinite;
+  }
+
+  /* Big decorative quote mark */
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 7rem;
+    color: rgba(201,168,76,0.14);
+    line-height: 0.7;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.18rem;
+    color: var(--cream);
+    line-height: 1.8;
+    margin-bottom: 1.6rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .quote-rule {
+    width: 36px; height: 1px;
+    background: var(--gold);
+    margin-bottom: 0.9rem;
+  }
+
+  .quote-author {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.68rem; letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 1.6rem;
+    position: relative; z-index: 1;
+  }
+
+  .quote-bio {
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.8;
+    position: relative; z-index: 1;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding-top: 1.2rem;
+  }
+
+  /* Gold corner accent */
+  .quote-panel .corner-tl,
+  .quote-panel .corner-br {
+    position: absolute;
+    width: 18px; height: 18px;
+  }
+  .quote-panel .corner-tl {
+    top: 10px; left: 10px;
+    border-top: 1px solid rgba(178,34,34,0.6);
+    border-left: 1px solid rgba(178,34,34,0.6);
+  }
+  .quote-panel .corner-br {
+    bottom: 10px; right: 10px;
+    border-bottom: 1px solid rgba(178,34,34,0.6);
+    border-right: 1px solid rgba(178,34,34,0.6);
+  }
+
+  /* ── Animations ── */
+  @keyframes slideInLeft {
+    from { opacity:0; transform: translateX(-28px); }
+    to   { opacity:1; transform: translateX(0); }
+  }
+  @keyframes slideInRight {
+    from { opacity:0; transform: translateX(28px); }
+    to   { opacity:1; transform: translateX(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(18px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+  @keyframes shimmer {
+    0%   { left: -100%; }
+    50%  { left: 150%; }
+    100% { left: 150%; }
+  }
+
+  .section-header {
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.1s forwards;
+  }
+
+  @media(max-width: 720px) {
+    .contact-body { grid-template-columns: 1fr; gap: 2rem; }
+  }
+  @media(max-width: 480px) {
+    .contact-card { gap: 1.2rem; }
+    .contact-text p, .contact-text a { font-size: 0.95rem; }
+    .quote-panel { padding: 2rem 1.6rem; }
+    .quote-text { font-size: 1.05rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">DR. ARNOLD O. THOMPSON</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="books.html">Books</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="mission.html">Mission</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<main>
+  <div class="contact-inner">
+
+    <div class="section-header">
+      <div class="section-eyebrow">Reach Out</div>
+      <h2 class="section-title">Connect with <em>Dr. Thompson</em></h2>
+    </div>
+
+    <div class="contact-body">
+
+      <!-- Left: contact cards -->
+      <div class="contact-cards">
+
+        <div class="contact-card">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.09-1.09a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/>
+            </svg>
+          </div>
+          <div class="contact-text">
+            <div class="label">Phone</div>
+            <a href="tel:5614415442">561-441-5442</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div class="contact-text">
+            <div class="label">Email</div>
+            <a href="mailto:connectdrarnoldthompson@gmail.com">connectdrarnoldthompson@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div class="contact-text">
+            <div class="label">Mailing Address</div>
+            <p>5466 Ashland Farm Rd. SW<br>Oxford, GA 30054</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: quote panel -->
+      <div class="quote-panel">
+        <div class="corner-tl"></div>
+        <div class="corner-br"></div>
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">"Wisdom is riding on a passenger train of time on a collision course with destiny, and we are all in for the ride."</p>
+        <div class="quote-rule"></div>
+        <div class="quote-author">— Dr. Arnold O. Thompson</div>
+        <p class="quote-bio">Author. Theologian. Photographer. Advocate.<br>Available for book tours, talk shows, church engagements, lectures, and media interviews on faith, culture, and wisdom.</p>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-brand">Dr. Arnold O. Thompson</div>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="books.html">Books</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="mission.html">Mission</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <p>© 2025 Dr. Arnold O. Thompson · All rights reserved.</p>
+</footer>
+
+</body>
+</html>

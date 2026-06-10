@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission — Dr. Arnold O. Thompson</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root{--gold:#C9A84C;--gold-light:#E8C97A;--dark:#0D1F0F;--deep:#0F1A10;--mid:#1A2E1C;--text:#EDE8D8;--muted:#8A9080;--cream:#F5EDD8;--red:#B22222;--red-light:#D94040;}
+  *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+  body{font-family:'Cormorant Garamond',serif;background:var(--dark);color:var(--text);overflow-x:hidden;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,13,13,0.95);backdrop-filter:blur(12px);border-bottom:2px solid rgba(178,34,34,0.5);padding:0 4vw;display:flex;align-items:center;justify-content:space-between;height:68px;}
+  .nav-brand{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:0.18em;color:var(--gold);text-decoration:none;}
+  .nav-links{display:flex;gap:2.5rem;list-style:none;}
+  .nav-links a{text-decoration:none;color:var(--muted);font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;font-family:'Cormorant Garamond',serif;font-weight:400;transition:color 0.25s;}
+  .nav-links a:hover,.nav-links a.active{color:var(--gold);}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+  .hamburger span{width:24px;height:2px;background:var(--gold);display:block;}
+  .section-header{text-align:center;margin-bottom:4rem;}
+  .section-eyebrow{font-family:'Bebas Neue',sans-serif;letter-spacing:0.3em;font-size:0.7rem;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:1rem;}
+  .section-eyebrow::before,.section-eyebrow::after{content:'';display:block;width:30px;height:1px;background:rgba(178,34,34,0.5);}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--cream);line-height:1.2;}
+  .section-title em{color:var(--gold);font-style:italic;}
+  .gold-rule{width:60px;height:2px;background:var(--red);margin:1.5rem 0;}
+  .gold-divider{display:flex;align-items:center;gap:1.5rem;margin:3rem 0;}
+  .gold-divider::before,.gold-divider::after{content:'';flex:1;height:1px;background:rgba(178,34,34,0.2);}
+  .gold-divider span{color:var(--gold);font-size:1.2rem;}
+  footer{background:#080E09;border-top:1px solid rgba(178,34,34,0.25);padding:3rem 4vw;text-align:center;}
+  .footer-brand{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold);margin-bottom:0.5rem;}
+  footer p{font-size:0.8rem;color:var(--muted);}
+  .footer-links{display:flex;justify-content:center;gap:2rem;list-style:none;margin:1.5rem 0;flex-wrap:wrap;}
+  .footer-links a{color:var(--muted);text-decoration:none;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.25s;}
+  .footer-links a:hover{color:var(--gold);}
+  @media(max-width:768px){.nav-links{display:none;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:rgba(13,13,13,0.97);padding:1.5rem;gap:1rem;}.nav-links.open{display:flex;}.hamburger{display:flex;}}
+
+  .mission-inner{max-width:1200px;margin:0 auto;padding:8rem 4vw 6rem;}
+  .mission-hero-quote{text-align:center;max-width:750px;margin:0 auto 5rem;font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3vw,2rem);font-style:italic;color:var(--cream);line-height:1.6;}
+  .mission-hero-quote span{color:var(--gold);}
+  .mission-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-bottom:5rem;}
+  .pillar{padding:2.5rem 2rem;border:1px solid rgba(178,34,34,0.2);transition:border-color 0.3s;}
+  .pillar:hover{border-color:rgba(178,34,34,0.55);}
+  .pillar-num{font-family:'Bebas Neue',sans-serif;font-size:4rem;color:rgba(201,168,76,0.12);line-height:1;margin-bottom:1rem;}
+  .pillar h3{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);margin-bottom:1rem;}
+  .pillar p{font-size:0.95rem;line-height:1.8;color:#7A7268;}
+  .bbb-section{background:var(--mid);border:1px solid rgba(178,34,34,0.25);padding:3rem;max-width:800px;margin:0 auto;}
+  .bbb-section h3{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--cream);margin-bottom:1rem;line-height:1.2;}
+  .bbb-section h3 em{color:var(--gold);font-style:italic;}
+  .bbb-section p{font-size:1rem;line-height:1.8;color:#908878;margin-bottom:1.2rem;}
+
+  /* Promotion section */
+  .promo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.5rem;margin-top:2rem;}
+  .promo-card{background:var(--mid);padding:1.8rem 1.5rem;border-top:2px solid rgba(201,168,76,0.4);transition:transform 0.3s;}
+  .promo-card:hover{transform:translateY(-4px);}
+  .promo-card h4{font-family:'Playfair Display',serif;font-size:1rem;color:var(--gold);margin-bottom:0.6rem;}
+  .promo-card p{font-size:0.88rem;line-height:1.7;color:#7A7268;}
+
+  /* Faith section */
+  .faith-block{max-width:800px;margin:0 auto;background:linear-gradient(150deg,#0a1f0c,#081508);border:1px solid rgba(178,34,34,0.35);padding:3rem;position:relative;overflow:hidden;}
+  .faith-block p{font-size:1rem;line-height:1.85;color:#908878;margin-bottom:1.2rem;}
+  .faith-block .scripture{font-style:italic;color:var(--gold);font-size:1rem;border-left:2px solid var(--gold);padding-left:1.2rem;margin-top:1.5rem;}
+
+  @media(max-width:768px){.mission-pillars{grid-template-columns:1fr;}.promo-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:480px){.promo-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-brand" href="index.html">DR. ARNOLD O. THOMPSON</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="books.html">Books</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="mission.html" class="active">Mission</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<main>
+  <div class="mission-inner">
+
+    <div class="section-header">
+      <div class="section-eyebrow">Purpose &amp; Vision</div>
+      <h2 class="section-title">Calling the Church.<br><em>Reaching the World.</em></h2>
+    </div>
+
+    <div class="mission-hero-quote">
+      "The broad sweep of my writing is to understand contemporary culture — both <span>secular and religious</span> — and how they interact and influence each other. My mission is to call the Evangelical Church to understand the secular world in order to reach it, not join it in its folly."
+    </div>
+
+    <div class="mission-pillars">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <h3>Light &amp; Salt</h3>
+        <p>Dr. Thompson wants the Church to do its job: to be the light of the world and the salt of the earth, and not a cheerleader for wickedness in high places.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <h3>Truth to Power</h3>
+        <p>Dr. Thompson is a person of faith who takes the Bible to be true. He believes that if he is to speak truth to power, it must be God's truth — the truth that changes the world, not his own. That is his goal: to bring God's truth to the people. He points to the example of Christ, who spoke truth to power but made it always about the One who says, "I am the way, the life, and the Truth."</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <h3>The Wisdom of Humility</h3>
+        <p>Christ became one of us to reach us. Dr. Thompson calls readers to take a long look at Christ in the wisdom of His love, grace, mercy, and forgiveness — and to extend that same spirit to others.</p>
+      </div>
+    </div>
+
+    <div class="gold-divider"><span>✦</span></div>
+
+    <!-- FAITH -->
+    <div class="section-header">
+      <div class="section-eyebrow">How Faith Shapes the Work</div>
+      <h2 class="section-title">God's Truth to <em>the People</em></h2>
+    </div>
+    <div class="faith-block">
+      <p>Dr. Thompson is a person of faith who takes the Bible to be true. He believes that if he is to speak truth to power, it must be God's truth — the truth that changes the world, not his own. That is his goal: to bring God's truth to the people.</p>
+      <p>He points to the example of Christ, who spoke truth to power but made it always about the One who says, "I am the way, the life, and the Truth." Dr. Thompson wants readers to take a long look at Christ in the wisdom of His love, grace, mercy, and forgiveness, and to extend that same spirit to others.</p>
+      <div class="scripture">"I am all things to all people, that I might by all means save some." — Paul the Apostle</div>
+    </div>
+
+    <div class="gold-divider"><span>✦</span></div>
+
+    <!-- PROMOTION & REACH -->
+    <div class="section-header">
+      <div class="section-eyebrow">Reaching the Audience</div>
+      <h2 class="section-title">Any Platform, <em>Every Opportunity</em></h2>
+    </div>
+    <p style="text-align:center;max-width:640px;margin:0 auto 0;font-size:1rem;line-height:1.85;color:var(--muted);">Dr. Thompson plans to reach his audience any way he can — guided by Paul's words: "I am all things to all people that I might by all means save some." He is available and eager for:</p>
+    <div class="promo-grid" style="margin-top:2rem;">
+      <div class="promo-card"><h4>Book Tours</h4><p>Meeting readers and speaking about the issues driving his work across the country.</p></div>
+      <div class="promo-card"><h4>Talk Shows</h4><p>Engaging media on faith, culture, wisdom, and the Evangelical Church's role in society.</p></div>
+      <div class="promo-card"><h4>Church Engagements</h4><p>Preaching, teaching, and leading conversations with congregations on his books' themes.</p></div>
+      <div class="promo-card"><h4>Lectures</h4><p>Speaking on specific topics of interest — theology, communication, culture, AI and human identity.</p></div>
+      <div class="promo-card"><h4>Media Interviews</h4><p>Radio, television, and podcast conversations on faith, loss, purpose, and the state of wisdom today.</p></div>
+    </div>
+
+    <div class="gold-divider"><span>✦</span></div>
+
+    <!-- BBB -->
+    <div class="bbb-section">
+      <h3>Books Behind <em>Bars</em></h3>
+      <div class="gold-rule"></div>
+      <p>Dr. Thompson has a special initiative called the <strong>Books Behind Bars (BBB) Program</strong>, through which he donates copies of his books to prisoners and seeks opportunities to engage them in conversation on the topics of the books.</p>
+      <p>This initiative flows from his decades of prison outreach ministry — including at the famed Joliet Maximum Security Prison — and his deep belief that truth and wisdom belong to every person, regardless of circumstance.</p>
+      <p style="font-style:italic;color:var(--gold);">"I am all things to all people, that I might by all means save some." — Paul the Apostle</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-brand">Dr. Arnold O. Thompson</div>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="books.html">Books</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="mission.html">Mission</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <p>&copy; 2025 Dr. Arnold O. Thompson &middot; All rights reserved.</p>
+</footer>
+</body>
+</html>
