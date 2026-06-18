@@ -23,6 +23,7 @@
   html { scroll-behavior:smooth; }
   body { font-family:'Cormorant Garamond',serif; background:var(--dark); color:var(--text); overflow-x:hidden; }
 
+  /* ── Nav ── */
   nav {
     position:fixed; top:0; left:0; right:0; z-index:1000;
     background:rgba(13,13,13,0.95); backdrop-filter:blur(12px);
@@ -40,6 +41,7 @@
   .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
   .hamburger span { width:24px; height:2px; background:var(--gold); display:block; }
 
+  /* ── Section helpers ── */
   .section-header { text-align:center; margin-bottom:3rem; }
   .section-eyebrow {
     font-family:'Bebas Neue',sans-serif; letter-spacing:0.3em; font-size:0.7rem;
@@ -50,6 +52,7 @@
   .section-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:700; color:var(--cream); line-height:1.2; }
   .section-title em { color:var(--gold); font-style:italic; }
 
+  /* ── Footer ── */
   footer {
     background:#080E09; border-top:1px solid rgba(178,34,34,0.25);
     padding:3rem 4vw; text-align:center;
@@ -80,24 +83,23 @@
     align-items: start;
   }
 
-  /* ── Cards ── */
-  .contact-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
+  /* ── Left column: email card + form ── */
+  .contact-left {
     opacity: 0;
     animation: slideInLeft 0.8s ease 0.3s forwards;
   }
 
+  /* Email card */
   .contact-card {
     display: flex;
     align-items: flex-start;
     gap: 1.5rem;
     padding: 1.5rem 0.6rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
     border-bottom: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 2rem;
     transition: background 0.3s;
   }
-  .contact-card:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
   .contact-card:hover { background: rgba(178,34,34,0.06); }
 
   .contact-icon {
@@ -121,13 +123,92 @@
     font-size: 0.65rem; letter-spacing: 0.25em;
     color: var(--gold); margin-bottom: 0.35rem;
   }
-  .contact-text p,
   .contact-text a {
     font-size: 1rem; color: var(--text);
     line-height: 1.65; text-decoration: none;
     transition: color 0.2s;
   }
   .contact-text a:hover { color: var(--gold-light); }
+
+  /* ── Contact Form ── */
+  .cf-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--cream); margin-bottom: 0.25rem;
+    letter-spacing: 0.01em;
+  }
+  .cf-divider {
+    width: 36px; height: 1px;
+    background: var(--gold);
+    margin: 0.75rem 0 1rem;
+  }
+  .cf-sub {
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+  .cf-row { margin-bottom: 1.1rem; }
+  .cf-label {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.62rem; letter-spacing: 0.25em;
+    color: var(--gold); margin-bottom: 0.4rem;
+  }
+  .cf-input, .cf-textarea {
+    width: 100%;
+    padding: 0.6rem 0.85rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.95rem;
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    box-sizing: border-box;
+    border-radius: 0;
+  }
+  .cf-input::placeholder, .cf-textarea::placeholder {
+    color: rgba(138,144,128,0.6);
+    font-style: italic;
+  }
+  .cf-input:focus, .cf-textarea:focus {
+    border-color: rgba(201,168,76,0.5);
+    background: rgba(255,255,255,0.06);
+  }
+  .cf-textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.65;
+  }
+  .cf-btn {
+    width: 100%;
+    padding: 0.8rem;
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.5);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.28em;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background 0.25s, color 0.25s, border-color 0.25s;
+  }
+  .cf-btn:hover {
+    background: rgba(201,168,76,0.12);
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+  .cf-btn:active { opacity: 0.85; }
+  .cf-note {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 0.6rem;
+    text-align: center;
+    letter-spacing: 0.03em;
+  }
 
   /* ── Quote Panel ── */
   .quote-panel {
@@ -139,8 +220,6 @@
     opacity: 0;
     animation: slideInRight 0.8s ease 0.5s forwards;
   }
-
-  /* Decorative shimmer line */
   .quote-panel::after {
     content: '';
     position: absolute;
@@ -149,8 +228,6 @@
     background: linear-gradient(90deg, transparent, rgba(201,168,76,0.06), transparent);
     animation: shimmer 4s ease-in-out 1.5s infinite;
   }
-
-  /* Big decorative quote mark */
   .quote-mark {
     font-family: 'Playfair Display', serif;
     font-size: 7rem;
@@ -159,7 +236,6 @@
     margin-bottom: 0.8rem;
     display: block;
   }
-
   .quote-text {
     font-family: 'Playfair Display', serif;
     font-style: italic;
@@ -170,13 +246,11 @@
     position: relative;
     z-index: 1;
   }
-
   .quote-rule {
     width: 36px; height: 1px;
     background: var(--gold);
     margin-bottom: 0.9rem;
   }
-
   .quote-author {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 0.68rem; letter-spacing: 0.3em;
@@ -184,7 +258,6 @@
     margin-bottom: 1.6rem;
     position: relative; z-index: 1;
   }
-
   .quote-bio {
     font-style: italic;
     font-size: 0.88rem;
@@ -194,13 +267,8 @@
     border-top: 1px solid rgba(201,168,76,0.15);
     padding-top: 1.2rem;
   }
-
-  /* Gold corner accent */
   .quote-panel .corner-tl,
-  .quote-panel .corner-br {
-    position: absolute;
-    width: 18px; height: 18px;
-  }
+  .quote-panel .corner-br { position: absolute; width: 18px; height: 18px; }
   .quote-panel .corner-tl {
     top: 10px; left: 10px;
     border-top: 1px solid rgba(178,34,34,0.6);
@@ -230,18 +298,15 @@
     50%  { left: 150%; }
     100% { left: 150%; }
   }
+  .section-header { opacity:0; animation: fadeUp 0.7s ease 0.1s forwards; }
 
-  .section-header {
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.1s forwards;
-  }
-
-  @media(max-width: 720px) {
+  /* ── Responsive ── */
+  @media(max-width:720px) {
     .contact-body { grid-template-columns: 1fr; gap: 2rem; }
   }
-  @media(max-width: 480px) {
+  @media(max-width:480px) {
     .contact-card { gap: 1.2rem; }
-    .contact-text p, .contact-text a { font-size: 0.95rem; }
+    .contact-text a { font-size: 0.95rem; }
     .quote-panel { padding: 2rem 1.6rem; }
     .quote-text { font-size: 1.05rem; }
   }
@@ -274,9 +339,10 @@
 
     <div class="contact-body">
 
-      <!-- Left: contact cards -->
-      <div class="contact-cards">
+      <!-- Left: email card + message form -->
+      <div class="contact-left">
 
+        <!-- Email card -->
         <div class="contact-card">
           <div class="contact-icon">
             <svg viewBox="0 0 24 24">
@@ -290,7 +356,34 @@
           </div>
         </div>
 
-       
+        <!-- Message form -->
+        <p class="cf-title">Send a Message</p>
+        <div class="cf-divider"></div>
+        <p class="cf-sub">Share your thoughts, your story, or how this ministry has touched your life.</p>
+
+        <div class="cf-row">
+          <label class="cf-label" for="cf-name">Your Name</label>
+          <input class="cf-input" type="text" id="cf-name" placeholder="Your full name" />
+        </div>
+
+        <div class="cf-row">
+          <label class="cf-label" for="cf-email">Your Email</label>
+          <input class="cf-input" type="email" id="cf-email" placeholder="your@email.com" />
+        </div>
+
+        <div class="cf-row">
+          <label class="cf-label" for="cf-subject">Subject</label>
+          <input class="cf-input" type="text" id="cf-subject" placeholder="e.g. Speaking engagement, book inquiry…" />
+        </div>
+
+        <div class="cf-row">
+          <label class="cf-label" for="cf-msg">Message</label>
+          <textarea class="cf-textarea" id="cf-msg" placeholder="Write your message here…"></textarea>
+        </div>
+
+        <button class="cf-btn" onclick="sendEmail()">Send Message</button>
+        <p class="cf-note">Opens your email app — sends directly to Dr. Thompson</p>
+
       </div>
 
       <!-- Right: quote panel -->
@@ -320,6 +413,28 @@
   </ul>
   <p>© 2025 Dr. Arnold O. Thompson · All rights reserved.</p>
 </footer>
+
+<script>
+  function sendEmail() {
+    const name    = document.getElementById('cf-name').value.trim();
+    const email   = document.getElementById('cf-email').value.trim();
+    const subject = document.getElementById('cf-subject').value.trim();
+    const msg     = document.getElementById('cf-msg').value.trim();
+
+    if (!name || !msg) {
+      alert('Please fill in your name and message before sending.');
+      return;
+    }
+
+    const to  = 'connectdrarnoldthompson@gmail.com';
+    const sub = encodeURIComponent(subject || 'Message from ' + name);
+    const body = encodeURIComponent(
+      'From: ' + name + (email ? ' <' + email + '>' : '') + '\n\n' + msg
+    );
+
+    window.location.href = 'mailto:' + to + '?subject=' + sub + '&body=' + body;
+  }
+</script>
 
 </body>
 </html>
